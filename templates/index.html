@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        background-image: url('https://img.freepik.com/premium-photo/dark-wizards-bookshelf-shadows-shadows-cast-d-00220-03_883586-96358.jpg?size=626&ext=jpg&ga=GA1.1.1852935159.1714740606&semt=sph');
+        background-size: contain;
+        background-repeat: repeat;
+        color: white;
+    }
+
+    .card-body {
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-body {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .clickable-card {
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
+
+    <nav class="navbar" style="background-color:#000000">
+        <a class="navbar-brand">My Book Recommender</a>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-white" style="font-size:50px">Top 50 Books</h2>
+            </div>
+
+            {% for i in range(book_name|length) %}
+                <a href="#" class="col-md-3 clickable-card" onclick="openISBN('{{ isbn[i] }}')">
+                    <div class="card" style="margin-top:50px;">
+                        <div class="card-body">
+                            <img class="card-img-top" src="{{ image[i] }}">
+                            <p class="text-white">{{ book_name[i] }}</p>
+                            <h4 class="text-white">{{ author[i] }}</h4>
+                            <h4 class="text-white">Votes - {{ votes[i] }}</h4>
+                            <h4 class="text-white">Rating - {{ rating[i] }}</h4>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <script>
+        function openISBN(isbn) {
+            var url = 'https://isbndb.com/book/'+String(isbn); // Construct the URL with the ISBN code
+            window.open(url, '_blank'); // Open the URL in a new tab/window
+        }
+    </script>
+
+</body>
+</html>
